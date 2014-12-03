@@ -172,6 +172,9 @@ swapChars:
 		beq $t9, $t3, validSwap
 		nop
 
+		b wrong
+		nop
+
 		oneAnd:
 			div $t7, $t2
 			mflo $t4
@@ -182,6 +185,7 @@ swapChars:
 			beq $t4, $t5, validSwap
 			nop
 
+		wrong:
 			li $v0, 4
 			la $a0, wrong_move # if the move is wrong we print a error message and exit the function
 			syscall
@@ -199,9 +203,8 @@ swapChars:
 			li $t8, '.'
 			sb $t8, 0($t9)
 
-			move $v1, $s6 # places the new swapped string into the return index
-
 	returnSwap:
+		add $v1, $s6, $zero # places the new swapped string into the return index
 		jr $ra
 		nop
 
